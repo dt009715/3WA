@@ -16,13 +16,18 @@ body {
 
 .convert1, .convert2 {
   margin: 10%;
+  border-bottom: #FB9489 1px solid;
 }
 
 input, ::placeholder {
   height: 100px;
-  width: 300px;
-  background-color: #3D3D3D;
+  width: 400px;
+  border: none;
+  outline: none;
+  background: none;
   color: #FB9489;
+  font-size: 18px;
+  width: 80px;
 }
 
 
