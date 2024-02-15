@@ -1,10 +1,6 @@
 fetch('https://cdn.taux.live/api/ecb.json')
     .then((response) => response.json())
     .then(data => {
-<<<<<<< Updated upstream
-        console.log(data)
-        console.log(data.rates.EUR)
-=======
         console.log(data.rates)
         // const copie = Object.create(Object.getPrototypeOf(data.rates))
         // const propNames = Object.getOwnPropertyNames(data.rates)
@@ -38,9 +34,6 @@ fetch('https://cdn.taux.live/api/ecb.json')
 
         })
         
-        
-        let ammount = 0
-        let currency = ""
         const amountText = document.querySelector('input[id="cible"]') 
         
         // function getCurrency(){
@@ -71,13 +64,13 @@ fetch('https://cdn.taux.live/api/ecb.json')
             newText.value = val
         }
         function convert(amount, sCurr){
-            arrayCurrency.forEach(rate => {
-                if(sCurr = rate)
-            })
+            let oneCurr
             for(let i =0 ; i<arrayCurrency.length ; i++){
-                if(sCurr === arrayName[i][1])
+                if(sCurr === arrayCurrency[i][1]){
+
+                }
             }
-            return amount / 
+            
         }
         
         amountText.addEventListener("keyup", () => {
@@ -88,5 +81,4 @@ fetch('https://cdn.taux.live/api/ecb.json')
             //setAmount(amountText.value)
         })
             
->>>>>>> Stashed changes
     })
