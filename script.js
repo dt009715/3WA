@@ -11,10 +11,9 @@ fetch('https://cdn.taux.live/api/ecb.json')
         for(let i = 0 ; i < arrayCurrency.length ; i++){
             const myOptions = `<option value ="${arrayCurrency[i][1]}">${arrayCurrency[i][0]}</option>`
             select.innerHTML += myOptions
-            }
+        }
 
     })
-    const amountText = document.querySelector('input[id="amount1"]') 
     // Récupère la contenu de input de gauche
     function getAmount(){
         return document.querySelector('input[id="amount1"]')
@@ -28,8 +27,8 @@ fetch('https://cdn.taux.live/api/ecb.json')
             if(currency.selected){
                 selectedCurrency = currency
             }
-            })
-            return selectedCurrency
+        })
+        return selectedCurrency
     }
     // Récupère l'option d'arrivée séléctionnée
     function getCurrencyCible(){
@@ -40,25 +39,68 @@ fetch('https://cdn.taux.live/api/ecb.json')
             if(currency.selected){
                 selectedCurrency = currency
             }
-            })
-            return selectedCurrency  
+        })
+        return selectedCurrency  
     }
-    // Met à jour l'input d'arrivé
+    // Met à jour l'input d'arrivée
     function setAmount(val){
         const newText = document.querySelector('input[id="amount2"]')
         newText.value = val
     }
-    // Converit notre monnaie de départ grâce à notre taux de départ et d'arrivé
+    // Converit notre monnaie de départ grâce à notre taux de départ et d'arrivée
     function convert(amount, myCurr, sCurr){
-        amount = amount * sCurr.value / myCurr.value
-        return amount
+        return (amount = amount * sCurr.value / myCurr.value).toFixed(2)
     }
-    amountText.addEventListener("keyup", () => {
+    // Echange les positions du select de départ et le select d'arrivée
+    function switchCurrency(){
+        // Nous récupérons les options selectionnées
+        const allOptionsSelected = document.querySelectorAll('option:checked')
+        const optionDepart = allOptionsSelected[0]
+        const optionArrive = allOptionsSelected[1]
+        // Nous récupérons les selects ainsi que leurs options
+        const mySelectDepart = document.querySelector('select[id="search1"]')
+        const allOptionsDepart = mySelectDepart.querySelectorAll('option')
+        const mySelectArrive = document.querySelector('select[id="search2"]')
+        const allOptionsArrive = mySelectArrive.querySelectorAll('option')
+        let indexDepart = 0
+
+        // On boucle dans chaque select séparèment afin de trouver l'option selectionnée de l'un pour l'autre
+        allOptionsDepart.forEach(option => {
+            if(option.value === optionArrive.value){
+                console.log(option)
+                option.selected = true
+                mySelectDepart.selectedIndex = indexDepart
+            }
+            indexDepart++
+        })
+        let indexArrive = 0
+        allOptionsArrive.forEach(option => {
+            if(option.value === optionDepart.value){
+                console.log(option)
+                option.selected = true
+                mySelectArrive.selectedIndex = indexArrive
+            }
+            indexArrive++
+        })
+    }
+    // Notre function principale
+    function triggerEvent(){
         const firstCurrency = getMyCurrency()
         const secondCurrency = getCurrencyCible()
         const myAmount = getAmount()
         const valConvert = convert(myAmount.value, firstCurrency, secondCurrency)
         setAmount(valConvert)
+    }
+    // Création de nos Events sur nos select par un simple click sur une option et par le clavier dans notre input type="text"
+    const myOptions = document.querySelectorAll('option')
+    const amountText = document.querySelector('input[id="amount1"]') 
+    myOptions.forEach(option => option.addEventListener('click', triggerEvent))
+    amountText.addEventListener("keyup", triggerEvent)
+    
+    // Création de l'event bouton switch
+    const buttonSwitch = document.querySelector('button')
+    buttonSwitch.addEventListener('click', ()=>{
+        switchCurrency()
+        triggerEvent()
     })
-        
 })
