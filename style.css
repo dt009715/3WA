@@ -11,26 +11,43 @@ body {
  }
 .convert {
   display: grid;
-  grid-template-areas: "convert1 convert2";
+  grid-template-areas: "convert1 buttonSwitch convert2";
 }
 
 .convert1, .convert2 {
-  margin: 10%;
-  border-bottom: #FB9489 1px solid;
+  margin: 2%;
+  /*border-bottom: #FB9489 1px solid;*/
 }
 
-input, ::placeholder {
+input  {
   height: 100px;
-  width: 400px;
+  width: 300px;
   border: none;
-  outline: none;
+  outline:   none;
   background: none;
   color: #FB9489;
   font-size: 18px;
-  width: 80px;
+  text-align: center;
+  
 }
-
-
+.convert1 > ::placeholder{
+  text-align: right;
+  text-decoration: underline;
+}
+.convert2 > ::placeholder{
+  text-decoration: underline;
+}
+.switchDiv{
+  display: grid;
+}
+.buttonSwitch{
+  align-self: center;
+  justify-self: center;
+}
+.buttonSwitch:hover{
+  font-size: 30px;
+  transition-duration: 1s;
+}
 
 /* Font  */
 
