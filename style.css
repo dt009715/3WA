@@ -4,8 +4,9 @@ body {
     color: #FB9489;
     background-color: #3D3D3D;
     text-align: center;
-    
-}
+    overflow: hidden;
+  }
+  
  h1 {
   font-size: 5rem;
   margin-top: 5%;
