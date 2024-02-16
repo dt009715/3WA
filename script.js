@@ -69,8 +69,8 @@ fetch('https://cdn.taux.live/api/ecb.json')
     }
     // Notre function principale
     function triggerEvent(){
-        const firstCurrency = getCurrency('select[id="search1"')
-        const secondCurrency = getCurrency('select[id="search2"')
+        const firstCurrency = getCurrency('select[id="search1"]')
+        const secondCurrency = getCurrency('select[id="search2"]')
         const myAmount = getAmount()
         const valConvert = convert(myAmount.value, firstCurrency, secondCurrency)
         setAmount(valConvert)
@@ -82,7 +82,7 @@ fetch('https://cdn.taux.live/api/ecb.json')
     amountText.addEventListener("keyup", triggerEvent)
     
     // Création de l'event bouton switch
-    const buttonSwitch = document.querySelector('button')
+    const buttonSwitch = document.querySelector('input[id="switchButton"]')
     buttonSwitch.addEventListener('click', ()=>{
         switchCurrency()
         triggerEvent()
