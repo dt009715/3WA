@@ -6,7 +6,7 @@ fetch('https://cdn.taux.live/api/ecb.json')
     const arrayCurrency = Object.keys(data.rates).map(function(rate) {
         return [rate, data.rates[rate]]
     })
-    
+    // On liste le tableau et on push une balise image
     arrayCurrency.forEach(currency =>{
         const code = currency[0].slice(0, 2)
         if(code === "EU"){
@@ -17,6 +17,7 @@ fetch('https://cdn.taux.live/api/ecb.json')
             currency.push(myImg)
         }
     })
+    // On classe le tableau par ordre alphabétique
     arrayCurrency.sort()
     // On crée nos options dans les selects
     // Nous stockons dans la value de notre option le taux de change et dans le textContent le nom du taux
@@ -42,6 +43,8 @@ fetch('https://cdn.taux.live/api/ecb.json')
         const currentCurrency = convertSelect.querySelector('option:checked')
         return currentCurrency
     }
+    // On récupère les divs comprenants les ids corespondant
+    // On insere notre balise stockée dans l'id de l'option
     function showFlag(sCurr, fCurr){
 
         const myDivStart = document.querySelector('div[id="flag1"]')
@@ -50,12 +53,19 @@ fetch('https://cdn.taux.live/api/ecb.json')
         myDivFinish.innerHTML = fCurr.id
     }
     // Met à jour l'input d'arrivée
+    // Vérifie si l'input de départ est vide afin de ne plus rien afficher si c'est le cas
     function setAmount(val){
         const newText = document.querySelector('input[id="amount2"]')
-        newText.value = val
+        const inputText = document.querySelector('input[id="amount1"]')
+        if(inputText.value === ''){
+            newText.value = ''
+        }else{
+            newText.value = val
+        }
     }
-    // Convertit notre monnaie de départ grâce à notre taux de départ et d'arrivée
+    // Convertit notre montant de départ grâce à notre taux de départ et d'arrivée
     function convert(amount, currStart, currFinish){
+        // Montant x TauxArrivée / TauxDépart arrondie à deux zéro après la virgule
         return (amount = amount * currFinish.value / currStart.value).toFixed(2)
     }
     // Echange les positions du select de départ et le select d'arrivée
@@ -97,9 +107,10 @@ fetch('https://cdn.taux.live/api/ecb.json')
         setAmount(valConvert)
     }
     // Création de nos Events sur nos select par un simple click sur une option et par le clavier dans notre input type="text"
-    const myOptions = document.querySelectorAll('option')
-    const amountText = document.querySelector('input[id="amount1"]') 
-    myOptions.forEach(option => option.addEventListener('click', triggerEvent))
+    const mySelects = document.querySelectorAll('select')
+    const amountText = document.querySelector('input[id="amount1"]')
+    mySelects.forEach(select => select.addEventListener('click', triggerEvent))
+    
     amountText.addEventListener("keyup", triggerEvent)
     
     // Création de l'event bouton switch
