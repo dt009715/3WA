@@ -6,6 +6,13 @@ fetch('https://cdn.taux.live/api/ecb.json')
     const arrayCurrency = Object.keys(data.rates).map(function(rate) {
         return [rate, data.rates[rate]]
     })
+    
+    arrayCurrency.forEach(currency =>{
+        const code = currency[0].slice(0, 2)
+        const myImg = `<img src="https://flagsapi.com/${code}/flat/64.png">`
+        currency.push(myImg)
+    })
+    
     // On crée nos options dans les selects
     // Nous stockons dans la value de notre option le taux de change et dans le textContent le nom du taux
     // arrayCurrency étant un tableau à double entrée, à chaque itération nous appelons le taux grâce à tableau[i][1], 1 étant la position de notre taux dans le tableau
@@ -13,10 +20,11 @@ fetch('https://cdn.taux.live/api/ecb.json')
     const mySelect = document.querySelectorAll('select')
     mySelect.forEach(select =>{
         for(let i = 0 ; i < arrayCurrency.length ; i++){
-            const myOptions = `<option value ="${arrayCurrency[i][1]}">${arrayCurrency[i][0]}</option>`
+            const myOptions = `<option value ="${arrayCurrency[i][1]}" id ="${arrayCurrency[i][2]}>${arrayCurrency[i][0]}</option>`
             select.innerHTML += myOptions
         }
     })
+
     // Récupère la contenu de input de gauche
     // Retourne l'input de gauche
     function getAmount(){
@@ -28,6 +36,12 @@ fetch('https://cdn.taux.live/api/ecb.json')
         const convertSelect = document.querySelector(cible)
         const currentCurrency = convertSelect.querySelector('option:checked')
         return currentCurrency
+    }
+    function showFlag(sCurr, fCurr){
+        const myDivStart = document.querySelector('div[id="flag1"]')
+        const myDivFinish = document.querySelector('div[id="flag2"]')
+        myDivStart.innerHTML += sCurr.id
+        myDivFinish.innerHTML += fCurr.id
     }
     // Met à jour l'input d'arrivée
     function setAmount(val){
@@ -71,6 +85,7 @@ fetch('https://cdn.taux.live/api/ecb.json')
     function triggerEvent(){
         const firstCurrency = getCurrency('select[id="search1"]')
         const secondCurrency = getCurrency('select[id="search2"]')
+        showFlag(firstCurrency, secondCurrency)
         const myAmount = getAmount()
         const valConvert = convert(myAmount.value, firstCurrency, secondCurrency)
         setAmount(valConvert)
