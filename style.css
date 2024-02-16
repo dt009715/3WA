@@ -25,8 +25,11 @@ body {
 }
 .convert2{
   display: grid;
-  grid-template-areas: " secondSearch secondFlag"; 
-  justify-content: left;
+  grid-template-areas: " secondFlag secondSearch"; 
+  justify-content: right;
+}
+.secondSearch{
+  width:25%;
 }
 #flag1{
   width: 30%;
