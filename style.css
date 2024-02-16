@@ -16,14 +16,23 @@ body {
 
 .convert1, .convert2 {
   margin: 2%;
-  /*border-bottom: #FB9489 1px solid;*/
+ 
 }
-
-#flag1{
+.convert1{
   display: grid;
+  grid-template-areas: " firstSearch firstFlag"; 
+  justify-content: right;
+}
+.convert2{
+  display: grid;
+  grid-template-areas: " secondSearch secondFlag"; 
+  justify-content: left;
+}
+#flag1{
+  width: 30%;
 }
 #flag2{
-  display: grid;
+  width: 30%;
 }
 input  {
   height: 100px;
@@ -33,11 +42,11 @@ input  {
   background: none;
   color: #FB9489;
   font-size: 18px;
-  text-align: center;
+  text-align: left;
   
 }
 .convert1 > ::placeholder{
-  text-align: right;
+  text-align: left;
   text-decoration: underline;
 }
 .convert2 > ::placeholder{
