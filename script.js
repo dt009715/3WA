@@ -114,7 +114,7 @@ fetch('https://cdn.taux.live/api/ecb.json')
     amountText.addEventListener("keyup", triggerEvent)
     
     // Création de l'event bouton switch
-    const buttonSwitch = document.querySelector('input[id="switchButton"]')
+    const buttonSwitch = document.querySelector('button[id="switchButton"]')
     buttonSwitch.addEventListener('click', ()=>{
         switchCurrency()
         triggerEvent()
