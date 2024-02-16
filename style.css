@@ -47,8 +47,18 @@ input  {
 .buttonSwitch:hover{
   font-size: 30px;
   transition-duration: 1s;
+  transition-timing-function: linear;
 }
-
+/*Select*/
+select{
+  background:none;
+  background-color: #3D3D3D;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  font-size: 3vh;
+  text-decoration: black;
+  color: #FB9489;
+}
 /* Font  */
 
 .poppins-thin {
