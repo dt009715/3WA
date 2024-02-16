@@ -9,10 +9,15 @@ fetch('https://cdn.taux.live/api/ecb.json')
     
     arrayCurrency.forEach(currency =>{
         const code = currency[0].slice(0, 2)
-        const myImg = `<img src="https://flagsapi.com/${code}/flat/64.png">`
-        currency.push(myImg)
+        if(code === "EU"){
+            const myImg = `<img src="./ico/EU.png">`
+            currency.push(myImg)
+        }else{
+            const myImg = `<img src="https://flagsapi.com/${code}/flat/64.png">`
+            currency.push(myImg)
+        }
     })
-    
+    arrayCurrency.sort()
     // On crée nos options dans les selects
     // Nous stockons dans la value de notre option le taux de change et dans le textContent le nom du taux
     // arrayCurrency étant un tableau à double entrée, à chaque itération nous appelons le taux grâce à tableau[i][1], 1 étant la position de notre taux dans le tableau
@@ -82,7 +87,7 @@ fetch('https://cdn.taux.live/api/ecb.json')
             indexFinish++
         })
     }
-    // Notre function principale
+    // Notre fonction principale
     function triggerEvent(){
         const firstCurrency = getCurrency('select[id="search1"]')
         const secondCurrency = getCurrency('select[id="search2"]')
