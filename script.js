@@ -20,7 +20,7 @@ fetch('https://cdn.taux.live/api/ecb.json')
     const mySelect = document.querySelectorAll('select')
     mySelect.forEach(select =>{
         for(let i = 0 ; i < arrayCurrency.length ; i++){
-            const myOptions = `<option value ="${arrayCurrency[i][1]}" id ="${arrayCurrency[i][2]}>${arrayCurrency[i][0]}</option>`
+            const myOptions = `<option value ='${arrayCurrency[i][1]}' id ='${arrayCurrency[i][2]}'>${arrayCurrency[i][0]}</option>`
             select.innerHTML += myOptions
         }
     })
@@ -38,10 +38,11 @@ fetch('https://cdn.taux.live/api/ecb.json')
         return currentCurrency
     }
     function showFlag(sCurr, fCurr){
+
         const myDivStart = document.querySelector('div[id="flag1"]')
         const myDivFinish = document.querySelector('div[id="flag2"]')
-        myDivStart.innerHTML += sCurr.id
-        myDivFinish.innerHTML += fCurr.id
+        myDivStart.innerHTML = sCurr.id
+        myDivFinish.innerHTML = fCurr.id
     }
     // Met à jour l'input d'arrivée
     function setAmount(val){
@@ -102,4 +103,7 @@ fetch('https://cdn.taux.live/api/ecb.json')
         switchCurrency()
         triggerEvent()
     })
+    const firstCurrency = getCurrency('select[id="search1"]')
+    const secondCurrency = getCurrency('select[id="search2"]')
+    showFlag(firstCurrency, secondCurrency)
 })
